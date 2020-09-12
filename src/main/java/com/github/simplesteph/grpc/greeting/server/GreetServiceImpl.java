@@ -7,7 +7,7 @@ import io.grpc.stub.StreamObserver;
 import java.util.stream.Stream;
 
 public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
-
+// Unary
     @Override
     public void greet(GreetRequest request, StreamObserver<GreetResponse> responseObserver) {
         // extract the fields we need
@@ -26,7 +26,7 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
         // complete the RPC call
         responseObserver.onCompleted();
     }
-
+// Server Streaming
     @Override
     public void greetManyTimes(GreetManyTimesRequest request, StreamObserver<GreetManyTimesResponse> responseObserver) {
         String firstName = request.getGreeting().getFirstName();
@@ -47,7 +47,7 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
             responseObserver.onCompleted();
         }
     }
-
+//client streaming
     @Override
     public StreamObserver<LongGreetRequest> longGreet(StreamObserver<LongGreetResponse> responseObserver) {
         // we create the requestObserver that we'll return in this function
@@ -82,6 +82,7 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
         return requestObserver;
     }
 
+    //bidi
     @Override
     public StreamObserver<GreetEveryoneRequest> greetEveryone(StreamObserver<GreetEveryoneResponse> responseObserver) {
         StreamObserver<GreetEveryoneRequest> requestObserver = new StreamObserver<GreetEveryoneRequest>() {
